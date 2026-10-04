@@ -38,7 +38,7 @@ README.md
 pip install -r requirements.txt
 ```
 
-The code was developed on Python 3.14. On Windows, use `py` instead of `python` in the commands below.
+The code was developed using Python 3.14. On Windows.
 
 ## How to run
 
