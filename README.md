@@ -75,7 +75,7 @@ The two preprocessed training and validation files are already included in `data
 Every combination is logged to MLflow with its settings and its metrics for each fold. To look at the results:
 
 ```
-mlflow ui --backend-store-uri sqlite:///mlflow.db
+py -m mlflow ui --backend-store-uri sqlite:///mlflow.db
 ```
 
 Then open http://127.0.0.1:5000 in a browser.
