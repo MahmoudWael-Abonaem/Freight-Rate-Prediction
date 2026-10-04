@@ -1,0 +1,53 @@
+paths:
+  train: data/train-test.csv
+  validation: data/validation.csv
+  train_preprocessed: data/train-test_preprocessed.csv
+  validation_preprocessed: data/validation_preprocessed.csv
+  validation_predictions: results/validation_predictions.csv
+  december: results/december_chart_inputs.csv
+  final_model: results/final_model.joblib
+
+columns:
+  Load_Id: load_id
+  Pickup: pickup
+  Delivery: delivery
+  Pickup_Lat: pickup_lat
+  Pickup_Lon: pickup_lon
+  Delivery_Lat: delivery_lat
+  Delivery_Lon: delivery_lon
+  Distance: distance
+  Equipment: equipment
+  Weight: weight
+  Date: date
+  Market_Index: market_index
+  Quote_Signal: quote_signal
+  Target: posted_rate
+
+cv:
+  n_splits: 4
+  Gap: 160      # rows (not days) left unused between a fold's training part and its test part, so no single day is split across both.
+
+features:
+  Numeric: [Weight, Pickup_Lat, Pickup_Lon, Delivery_Lat, Delivery_Lon]
+  Equipment_Categories: [Dry Van, Flatbed, Reefer]
+  Poly_Degrees: [2, 3, 4]
+  Include_Day: [false, true]
+
+model:
+  Random_State: 0
+  Target: [log, raw]
+
+  SGD:
+    Penalty: null
+    Max_Iter: 3000
+    Tol: 0.00001
+    Learning_Rates:
+      - Name: invscaling_default   # scikit-learn's default (with shrinking)
+      - Name: constant_low
+        Learning_Rate: constant    # scikit-learn's default (starts from 0.01)
+  Boosting:
+    Learning_Rates: [0.01]
+
+mlflow:
+  Db_Path: mlflow.db
+  Experiment: freight_rate_experiments
