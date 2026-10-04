@@ -72,7 +72,7 @@ The two preprocessed training and validation files are already included in `data
 
 ## Experiments
 
-Every combination is logged to MLflow as its own run, with its settings and its metrics for each fold. To look at the results:
+Every combination is logged to MLflow with its settings and its metrics for each fold. To look at the results:
 
 ```
 mlflow ui --backend-store-uri sqlite:///mlflow.db
